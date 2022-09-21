@@ -1,6 +1,12 @@
 @extends('layouts.dashboard')
 @section('content')
-<a href="/student/create">List</a>
+<div class="container mt-4">
+@if ($message = Session::get('notif'))
+    <div class="alert alert-success" role="alert">
+        <strong>{{ $message }}</strong>
+    </div>
+@endif
+<a class="btn btn-primary" href="/student/create">List</a>
 <table class="table">
     <thead>
       <tr>
@@ -10,6 +16,7 @@
         <th scope="col">Gender</th>
         <th scope="col">Address</th>
         <th scope="col">Major</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -17,24 +24,18 @@
       <tr>
         {{-- iteration untuk auto number --}}
         <th scope="row">{{ $loop->iteration }}</th>
-        <td>{{ $item-> name }}</td>
-        <td>{{ $item-> date_birth }}</td>
-        <td>{{ $item-> gender }}</td>
-        <td>{{ $item-> address }}</td>
-        <td>{{ $item-> major }}</td>
+        <td>{{ $item->name }}</td>
+        <td>{{ $item->date_birth }}</td>
+        <td>{{ $item->gender }}</td>
+        <td>{{ $item->address }}</td>
+        <td>{{ $item->major }}</td>
+        <td>
+            {{-- route untuk  --}}
+            <a href="{{ route('student.edit', ['student' => $item->id]) }}" class="btn btn-primary">Edit</a>
+        </td>
       </tr>
       @endforeach
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
     </tbody>
   </table>
+</div>
 @endsection
