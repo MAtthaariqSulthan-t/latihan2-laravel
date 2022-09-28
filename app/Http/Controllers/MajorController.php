@@ -15,7 +15,8 @@ class MajorController extends Controller
      */
     public function index()
     {
-        //
+        $data = Major::get();
+        return view('pages.major.majorlist', ['data' => $data]);
     }
 
     /**
@@ -25,7 +26,8 @@ class MajorController extends Controller
      */
     public function create()
     {
-        //
+        $major = new Major();
+        return view('pages.major.majorform', ['major' => $major]);
     }
 
     /**
@@ -36,7 +38,9 @@ class MajorController extends Controller
      */
     public function store(StoreMajorRequest $request)
     {
-        //
+        $data = $request->all();
+        Major::create($data);
+        return redirect()->route('major.index')->with('notif', 'Berhasil Menyimpan');
     }
 
     /**
@@ -58,7 +62,7 @@ class MajorController extends Controller
      */
     public function edit(Major $major)
     {
-        //
+        return view('pages.major.majorform', ['major' => $major]);
     }
 
     /**
@@ -70,7 +74,10 @@ class MajorController extends Controller
      */
     public function update(UpdateMajorRequest $request, Major $major)
     {
-        //
+        $data = $request->all();
+        $major->update($data);
+        return redirect()->route('major.index')->with('notif', 'Berhasil Mengubah');
+
     }
 
     /**
@@ -81,6 +88,7 @@ class MajorController extends Controller
      */
     public function destroy(Major $major)
     {
-        //
+        $major->delete();
+        return redirect()->route('major.index')->with('notif', 'Berhasil Menghapus');
     }
 }

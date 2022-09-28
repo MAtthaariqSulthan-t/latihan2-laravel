@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\MajorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,3 +36,4 @@ Route::get('/travel', [HomeController::class, 'contact'])->name('contact');
 // Route::delete('/student/{id}', [StudentController::class, 'destroy']);
 //Route dibawah mewakili semua route diatas
 Route::resource('student', StudentController::class);
+Route::resource('major', MajorController::class);
