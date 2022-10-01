@@ -19,7 +19,8 @@ class CreateStudentsTable extends Migration
             $table->date( 'date_birth');
             $table->enum( 'gender', [ 'male', 'female']);
             $table->text( 'address');
-            $table->string( 'major')->nullable();
+            // $table->string( 'major')->nullable();
+            $table->integer( 'major_id')->nullable();
             $table->timestamps(); // kolom created_at, update_at
         });
     }

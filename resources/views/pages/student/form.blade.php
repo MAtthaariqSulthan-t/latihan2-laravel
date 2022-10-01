@@ -35,9 +35,10 @@
   </div>
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Major</label>
-    <select name="major" id="major" class="form-select">
-        <option value="ASE" {{ $student->major == 'ASE' ? 'selected' : '' }}>ASE</option>
-        <option value="DBM" {{ $student->major == 'DBM' ? 'selected' : '' }}>DBM</option>
+    <select name="major_id" id="major" class="form-select">
+    @foreach ($majors as $major)
+    <option value=" {{ $major->id }}">{{ $major->name }}</option>
+    @endforeach
     </select>
   </div>
   <div class="mb-3">

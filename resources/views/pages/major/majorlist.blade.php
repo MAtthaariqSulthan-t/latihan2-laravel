@@ -27,10 +27,13 @@
             <td>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <a href="{{ route('major.edit', ['major' => $item->id]) }}" class="btn btn-primary col-md-12">Edit</a>
                     </div>
-                <div class="col-md-6">
+                    <div class="col-md-4">
+                        <a href="{{ route('major.show', ['major' => $item->id]) }}" class="btn btn-info col-md-12">Students</a>
+                    </div>
+                <div class="col-md-4">
                     <form action="{{ route('major.destroy', ['major' => $item->id]) }}" method="post">
                         @method('delete')
                         @csrf

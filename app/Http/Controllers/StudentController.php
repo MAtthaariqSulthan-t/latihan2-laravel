@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\Major;
 
 class StudentController extends Controller
 {
@@ -15,7 +16,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $data = Student::get();
+        $data = Student::with(['major'])->get();
         return view('pages.student.list', ['data' => $data]);
         // return view('pages.list', compact($data));
     }
@@ -27,8 +28,13 @@ class StudentController extends Controller
      */
     public function create()
     {
+
         $student = new Student();
-        return view('pages.student.form', ['student' => $student]);
+        $majors = Major::get();
+
+
+        return view('pages.student.form', ['student' => $student], ['majors' => $majors]);
+
     }
 
     /**
@@ -63,7 +69,8 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('pages.student.form', ['student' => $student]);
+        $majors = Major::get();
+        return view('pages.student.form', ['student' => $student, 'majors' => $majors]);
     }
 
     /**
