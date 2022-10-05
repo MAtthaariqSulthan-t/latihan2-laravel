@@ -14,12 +14,12 @@
     <label for="exampleFormControlInput1" class="form-label">Nama</label>
     {{-- value student untuk mengambil data --}}
     <input type="text" class="form-control" name="name" id="exampleFormControlInput1" value="{{ $student->name }}">
-    @error('name') <div class="text-muted">masukan nama</div> @enderror
+    @error('name') <div class="text-muted">{{ $message }}</div> @enderror
   </div>
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Date Birth</label>
     <input type="date" class="form-control" name="date_birth" id="exampleFormControlInput1" value="{{ $student->date_birth }}">
-    @error('date_birth') <div class="text-muted">masukan date birth</div> @enderror
+    @error('date_birth') <div class="text-muted">{{ $message }}</div> @enderror
   </div>
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Gender</label>
@@ -31,7 +31,7 @@
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Address</label>
     <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3">{{ $student->address }}</textarea>
-    @error('address') <div class="text-muted">masukan date birth</div> @enderror
+    @error('address') <div class="text-muted">{{ $message }}</div> @enderror
   </div>
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Major</label>
