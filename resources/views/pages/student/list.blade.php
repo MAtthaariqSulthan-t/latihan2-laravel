@@ -7,7 +7,23 @@
     </div>
 @endif
 <a class="btn btn-primary" href="/student/create">List</a>
-<table class="table mt-4">
+<form class="d-flex mt-2" role="search" action="{{ route('student.index') }}">
+    <div class="mb-3 mt-2">
+        <select type="text" name="filter" class="form-select" id="formGroupExampleInput" placeholder="All">
+            <option value="">All</option>
+            @foreach ($majors as $item)
+                <option value="{{ $item->id }}" {{ request('filter') == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="mb-3 mt-2 ms-2">
+        <input class="form-control me-2" type="text" name="search" placeholder="Search here" aria-label="Search" value="{{ request('search') }}">
+    </div>
+    <div class="mb-3 mt-2 ms-2">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </div>
+</form>
+<table class="table">
     <thead>
       <tr>
         <th scope="col" class="table-dark">#</th>
@@ -48,6 +64,7 @@
       @endforeach
     </tbody>
   </table>
-  {{ $data->links() }}
+  {{-- {{ $data->links() }} --}}
+  {{ $data->withQueryString()->links() }}
 </div>
 @endsection
