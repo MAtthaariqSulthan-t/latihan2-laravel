@@ -32,6 +32,7 @@
         <th scope="col" class="table-dark">Gender</th>
         <th scope="col" class="table-dark">Address</th>
         <th scope="col" class="table-dark">Major</th>
+        <th scope="col" class="table-dark">images</th>
         <th scope="col" class="table-dark">Action</th>
       </tr>
     </thead>
@@ -45,6 +46,7 @@
         <td>{{ $item->gender }}</td>
         <td>{{ $item->address }}</td>
         <td>{{ $item->major->name }}</td>
+        <td><img src="storage/{{ $item->images }}" alt="" width="50px"></td>
         <td>
             {{-- route untuk  --}}
             <div class="row">

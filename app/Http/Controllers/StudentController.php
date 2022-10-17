@@ -7,6 +7,7 @@ use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Major;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class StudentController extends Controller
 {
@@ -65,6 +66,7 @@ class StudentController extends Controller
     public function store(StoreStudentRequest $request)
     {
         $data = $request->all();
+        $data['images'] = ($request->file('images')->store('images/student', 'public'));
         Student::create($data);
         return redirect('student')->with('notif', 'berhasil menambahkan data');;
     }
@@ -102,6 +104,14 @@ class StudentController extends Controller
     public function update(UpdateStudentRequest $request, Student $student)
     {
         $data = $request->all();
+        $image = $request->file('images');
+        if($image) {
+            $exists = File::exists(storage_path('app/public/').$student->images);
+            if($exists) {
+                File::delete(storage_path('app/public/').$student->images);
+            }
+            $data['images'] = $image->store('images/student','public');
+        }
         $student->update($data);
         return redirect()->route('student.index')->with('notif', 'berhasil mengedit data');
     }
@@ -115,6 +125,7 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
+        File::delete(storage_path('app/public/').$student->images);
         return redirect()->route('student.index')->with('notif', 'berhasil menghapus data');
     }
 }

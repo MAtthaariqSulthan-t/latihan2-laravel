@@ -3,10 +3,10 @@
 <div class="container mt-4">
 <h1>{{ $student->id ? "Edit" : "Create" }}</h1>
 @if ($student->id)
-    <form action="{{ route('student.update', ['student' => $student->id]) }}" method="post">
+    <form action="{{ route('student.update', ['student' => $student->id]) }}" method="post" enctype="multipart/form-data">
     @method('PUT')
 @else
-    <form action="{{ route('student.store') }}" method="post">
+    <form action="{{ route('student.store') }}" method="post" enctype="multipart/form-data">
 
 @endif
     @csrf
@@ -40,6 +40,10 @@
     <option value=" {{ $major->id }}">{{ $major->name }}</option>
     @endforeach
     </select>
+  </div>
+  <div class="mb-3">
+    <label for="formFile" class="form-label">Default file input example</label>
+    <input class="form-control" name="images" type="file" id="formFile">
   </div>
   <div class="mb-3">
     <button type="submit" class="btn btn-primary mb-3">Confirm</button>
